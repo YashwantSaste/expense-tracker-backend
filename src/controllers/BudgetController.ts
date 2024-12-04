@@ -19,13 +19,13 @@ export const addBudget = async (req: Request, res: Response, next: NextFunction)
       }
   
       const newBudget: IBudget = {
-        budgetId: uuidv4(), // Ensure this generates a valid UUID
+        budgetId: uuidv4(),
         category,
         amount,
         threshold,
       };
   
-      console.log('Generated budgetId:', newBudget.budgetId); // Debugging line
+      console.log('Generated budgetId:', newBudget.budgetId);
   
       user.budgets.push(newBudget);
       await user.save();

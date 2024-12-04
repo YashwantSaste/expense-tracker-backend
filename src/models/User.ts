@@ -1,4 +1,4 @@
-import mongoose, { Document, mongo, Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface IBudget {
   budgetId: string;  
@@ -21,10 +21,21 @@ const BudgetSchema = new Schema<IBudget>({
     type: String,
     unique: true,
   },
-  category: { type: String, required: true },
-  amount: { type: Number, required: true },
-  threshold: { type: Number, required: true },
-}, { _id: false }); // Disables MongoDB's default _id for budgets
+  category: { 
+    type: String, 
+    required: true 
+  },
+  amount: { 
+    type: Number, 
+    required: true 
+  },
+  threshold: { 
+    type: Number, 
+    required: true 
+  },
+}, 
+{ _id: false })
+; 
 
 const UserSchema: Schema = new Schema({
   userId: {
@@ -32,10 +43,22 @@ const UserSchema: Schema = new Schema({
     default: () => new mongoose.Types.ObjectId(),  
     unique: true,
   },
-  name: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  budgets: { type: [BudgetSchema], default: [] }, 
+  name: { 
+    type: String, 
+    required: true 
+  },
+  email: { 
+    type: String, 
+    required: true 
+  },
+  password: { 
+    type: String, 
+    required: true 
+  },
+  budgets: { 
+    type: [BudgetSchema], 
+    default: [] 
+  }, 
 });
 
 export default mongoose.model<IUser>("User", UserSchema);

@@ -20,7 +20,6 @@ export const addTransaction = async (req: Request, res: Response, next: NextFunc
   }
 
   try {
-    // If the transaction is an expense, check the budget for the category
     if (type === "expense") {
       const user: IUser | null = await User.findOne({userId:userId});
       if (!user) {
@@ -28,7 +27,6 @@ export const addTransaction = async (req: Request, res: Response, next: NextFunc
         return;
       }
 
-      // Find the budget for the category
       const budget = user.budgets.find((b) => b.category === category);
       if(budget){
         if (amount > budget.amount) {
